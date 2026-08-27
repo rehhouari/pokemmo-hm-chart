@@ -1,0 +1,68 @@
+.hm-check input{
+  display: hidden
+}
+:root {
+  font-size: 1em;
+}
+
+.container div, .container table{
+  margin-top: 1em
+}
+
+.search-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  align-items: center;
+}
+
+.search-bar {
+  flex-grow: 1;
+}
+
+.type-select {
+}
+
+.dex {
+  width: 92px;
+  min-width: 92px;
+  text-align: start;
+}
+
+th, td {
+  text-align: center;
+}
+
+.hm-filters {
+  display: flex;
+  gap: 0.5em;
+  flex-wrap: wrap;
+  align-items:  stretch;
+  justify-content: center;
+}
+
+.hm-filters button {
+  flex: 1 1 0;
+  height: auto;
+  padding: 0.5em;
+}
+
+
+.types {
+  margin: 0!important;
+}
+
+.pagination {
+  display:flex;
+  gap:8px;
+  align-items:center;
+  justify-content: center;
+}
+
+.center {
+  text-align: center
+}
+
+footer {
+  margin-top: 2em  
+}

@@ -1,0 +1,87 @@
+<div x-data="HMMO" class="container">
+	<div class="search-row ">
+		<label class="search-bar">
+			Pokémon Name
+			<input type="text"
+			       placeholder="Search"
+			       x-model="search"
+			>
+		</label>
+		<label class="type-select">
+			Type
+			<select x-model="type">
+				<option value="">All</option>
+				<option value="normal">Normal</option>
+				<option value="fire">Fire</option>
+				<option value="water">Water</option>
+				<option value="electric">Electric</option>
+				<option value="grass">Grass</option>
+				<option value="ice">Ice</option>
+				<option value="fighting">Fighting</option>
+				<option value="poison">Poison</option>
+				<option value="ground">Ground</option>
+				<option value="flying">Flying</option>
+				<option value="psychic">Psychic</option>
+				<option value="bug">Bug</option>
+				<option value="rock">Rock</option>
+				<option value="ghost">Ghost</option>
+				<option value="dragon">Dragon</option>
+				<option value="dark">Dark</option>
+				<option value="steel">Steel</option>
+				<option value="fairy">Fairy</option>
+			</select>
+		</label>
+	</div>
+
+	<div class="hm-filters">
+		<template x-for="move in hms_info" :key="move.id">
+			<button x-text="move.name" :class="filters.includes(move.id) ? '' : 'secondary'" @click="toggle(move.id)"></button>
+		</template>
+	</div>
+	<div class="overflow-auto">
+		<table class="striped">
+			<thead>
+				<tr>
+					<th @click="setSort('dex')" style="cursor:pointer">#
+						<span x-show="sortBy === 'dex'" x-text="sortDir === 'asc' ? '▲' : '▼'"></span></th>
+					<th>Name</th>
+					<th>Type</th>
+					<template x-for="move in hms_info" :key="move.id">
+						<th class="hm" x-text="move.name"></th>
+					</template>
+
+					<th @click="setSort('count')" style="cursor:pointer">Count <span x-show="sortBy === 'count'" x-text="sortDir === 'asc' ? '▲' : '▼'"></span></th>
+				</tr>
+			</thead>
+			<tbody>
+				<template x-for="mon in paginatedResult" :key="mon.id">
+					<tr>
+						<td class="dex">
+							<span x-text="mon.id.padStart(3, '0')"></span>
+							<img :src="mon.sprite" loading="lazy" width="60" height="60">
+						</td>
+						<td><a :href="`https://pokemmo.shoutwiki.com/w/index.php?title=Special:Search&search=${mon.name}`" target="_blank" x-text="mon.name"></a></td>
+						<td>
+							<template x-for="type in mon.types" :key="type">
+								<img :src="getType(type)" width="50">
+							</template>
+						</td>
+						<template x-for="move in hms_info" :key="move.id">
+							<td class="hm">
+								<template x-if="hasMove(mon.id, move.id)">
+									<img src="/Custom-Icon-Design-Flatastic-9-Accept.16.png" width="16" loading="lazy">
+								</template>
+							</td>
+						</template>
+						<td x-text="mon.moves.length"></td>
+					</tr>
+				</template>
+			</tbody>
+		</table>
+	</div>
+	<div class="pagination">
+		<button class="secondary" @click="prevPage()" :disabled="page === 1">Prev</button>
+		<span x-text="`Page ${page} / ${totalPages}`"></span>
+		<button class="secondary" @click="nextPage()" :disabled="page === totalPages">Next</button>
+	</div>
+</div>
