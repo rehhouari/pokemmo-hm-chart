@@ -10,6 +10,7 @@ Inspired by [pokemondb's HMs Chart](https://pokemondb.net/firered-leafgreen/hms)
 
 - uses alpine.js for logic.
 - uses [pico.css](https://picocss.com/) for quick styling.
+- uses [pokeapi](http://pokeapi.co/) for sprites
 
 
 ```sh
